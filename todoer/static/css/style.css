@@ -1,0 +1,67 @@
+html {
+     font-family: 'Roboto Mono', monospace;
+    /*font-family: 'Montserrat', sans-serif;*/
+}
+body {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+}
+.content {
+    padding: 0 1rem 1rem;
+}
+.content h2 {
+    margin: 0 !important;
+}
+.list-group {
+    margin-top: 28px;
+}
+.form-group,
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+}
+.form-group > label,
+.form-group > input,
+.form-group > textarea {
+    padding: 0.5rem
+}
+.form-group > label {
+    min-width: 8rem;
+}
+.form-check > label {
+    margin-left: 8.5rem;
+}
+.form-group > input,
+.form-group > textarea {
+    flex-grow: 5;
+}
+button,
+.btn {
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+    nav small {
+        display: none;
+    }
+    .form-group {
+        flex-flow: column wrap;
+    }
+    .form-actions {
+        margin-top: 0.5rem;
+    }
+    .form-group > label {
+        min-width: 0;
+    }
+    .form-check > label {
+        margin-left: 0.5rem;
+    }
+    .form-group > input,
+    .form-group > textarea {
+        flex-grow: 1;
+        min-width: 0;
+        width: 100%;
+    }
+}

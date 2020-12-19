@@ -1,0 +1,50 @@
+<!--
+    The base template is directly in the templates directory.To keep the others organized, the templates for a blueprint
+     will be placed in a directory with the same name as the blueprint.
+-->
+<!--
+    % extends 'base.html' %: tells Jinja that this template should replace the blocks from the base template.
+-->
+{% extends 'base.html' %}
+
+<!--
+    All the rendered content must appear inside % block % tags that override blocks from the base template.
+-->
+{% block header %}
+    <h2>{% block title%}Todos{% endblock %}</h2>
+    <!-- When a user is logged in, add a link to the create view -->
+    {% if g.user %}
+        <a href="{{ url_for('todo.create') }}" class="btn btn-primary" role="button">New todo</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="list-group px-md-5">
+    {% for todo in todos %}
+        <article class="card {% if todo['completed'] == 1 %}border-secondary{% else %}border-primary{% endif %}">
+            <small class="card-header">
+                <span class="text-info">Created by <b>{{ todo['username'] }}</b>, on {{ todo['created_at'].strftime('%b-%d-%Y %H:%M') }}. </span>
+                {% if todo['completed'] == 1 %}
+                    <span class="text-success">And <b>completed</b> on {{ todo['completed_at'].strftime('%b-%d-%Y-%d %H:%M') }}.</span>
+                {% endif %}
+            </small>
+            <div class="card-body">
+                <h2 class="card-title {% if todo['completed'] == 1 %}text-secondary{% endif %}">{{ todo['task'] }}</h2>
+                <p class="card-text text-justify">{{ todo['description'] }}</p>
+                <!-- When the user is the creator of a To-Do, s/he’ll see an “Edit” link to the update view for that To-Do. -->
+                {% if g.user['id'] == todo['created_by'] %}
+                    <a href="{{ url_for('todo.update', id=todo['id']) }}"
+                       class="card-link font-weight-bold text-uppercase {% if todo['completed'] == 1 %}text-secondary{% endif %}">Edit</a>
+                {% endif %}
+            </div>
+        </article>
+        <!--
+            loop.last is a special variable available inside Jinja for loops.
+            It’s used to display a line after each post except the last one,
+        -->
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

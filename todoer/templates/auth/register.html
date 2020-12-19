@@ -1,0 +1,31 @@
+<!--
+    The base template is directly in the templates directory.To keep the others organized, the templates for a blueprint
+     will be placed in a directory with the same name as the blueprint.
+-->
+<!--
+    % extends 'base.html' %: tells Jinja that this template should replace the blocks from the base template.
+-->
+{% extends 'base.html' %}
+
+<!--
+    All the rendered content must appear inside % block % tags that override blocks from the base template.
+-->
+{% block header %}
+    <h2>{% block title%}Register{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+    <form class="d-flex p-2 flex-column" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input name="username" id="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+        </div>
+    </form>
+{% endblock %}

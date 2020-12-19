@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    Flask uses the Jinja template library to render templates.
+
+    The base template is directly in the templates directory.To keep the others organized, the templates for a blueprint
+     will be placed in a directory with the same name as the blueprint.
+-->
+<!--
+    There are three blocks defined here that will be overridden in the other templates:
+        - title
+        - header
+        - content
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Flask Project No. 1">
+<title>{% block title %}{% endblock %} - Todoer</title>
+<!--
+    Bootswatch: Pre-Compiled CSS. Free themes for Bootstrap.
+    Using the themes is as easy as downloading a CSS file and replacing the one that comes with Bootstrap.
+    Visit: https://bootswatch.com
+           https://bootswatch.com/cerulean
+           https://cdnjs.com/libraries/bootswatch
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
+      integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew==" crossorigin="anonymous" />
+<!--
+    Custom CSS
+-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+
+<nav class="navbar sticky-top justify-content-between navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><h1>Todoer <small class="text-secondary">with Flask</small></h1></a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02" style="flex-grow: 0">
+        <ul class="navbar-nav">
+            <!--
+                g is automatically available in templates, and if g.user is set (from load_logged_in_user), either:
+                    - the username and a log out link are displayed, or
+                    - links to register and log in are displayed.
+                url_for() is also automatically available, and is used to generate URLs to views instead of writing them
+                 out manually.
+            -->
+            {% if g.user %}
+                <li class="nav-item"><span class="navbar-brand">{{ g.user['username'] }}</span></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<section class="content">
+    <header class="m-1 p-1 border-bottom d-flex justify-content-between ">
+        {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class="p-3 mb-2 bg-danger text-white">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</section>
+<!-- Bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+
