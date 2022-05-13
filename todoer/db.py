@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Visit https://flask.palletsprojects.com/en/master/tutorial/database/
+# Visit https://flask.palletsprojects.com/en/2.1.x/tutorial/database/
 
 # Click: Command Line Interface Creation Kit, package to run commands in console/terminal to create the database model
 import click

@@ -16,7 +16,7 @@ DEBUG = True
 # Statement for environment type
 # ENV = 'production'
 
-# Define the database - we are working with  SQLite for this example
+# Define the database - we are working with SQLite for this example
 # DATABASE = 'sqlite:///' + os.path.join(BASE_DIR, 'app.db')
 DATABASE = os.path.join(BASE_DIR, 'app.db')
 DATABASE_CONNECT_OPTIONS = {}

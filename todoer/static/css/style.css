@@ -19,8 +19,10 @@ body {
 .form-group,
 .form-actions {
     display: flex;
-    justify-content: flex-end;
     padding: 0.5rem;
+}
+.form-actions {
+    justify-content: flex-end;
 }
 .form-group > label,
 .form-group > input,
@@ -42,10 +44,7 @@ button,
     text-transform: uppercase;
 }
 
-@media screen and (max-width: 600px) {
-    nav small {
-        display: none;
-    }
+@media (max-width: 576px) {
     .form-group {
         flex-flow: column wrap;
     }

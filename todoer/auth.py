@@ -111,8 +111,7 @@ def login() -> str:
             flash(error)
 
         else:
-            # There are not error, the user’s id is stored in a new session
-            # session is a dict that stores data across requests
+            # There are no error, the user’s id is stored in a new session is a dict that stores data across requests
             session.clear()
 
             # Access the columns of the user datatable by name,
